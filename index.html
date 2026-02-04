@@ -3,150 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViralMind AI - Gerador de Ideias</title>
+    <title>ViralMind AI v2.0</title>
     <style>
-        :root {
-            --primary: #8a2be2;
-            --dark: #0d1117;
-            --text: #c9d1d9;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .chat-container {
-            width: 90%;
-            max-width: 600px;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .chat-header {
-            padding: 20px;
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        #chat-box {
-            height: 400px;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .message {
-            max-width: 85%;
-            padding: 12px;
-            border-radius: 8px;
-            line-height: 1.4;
-        }
-
-        .user {
-            align-self: flex-end;
-            background: #1f6feb;
-            color: white;
-        }
-
-        .ai {
-            align-self: flex-start;
-            background: #30363d;
-            border: 1px solid #444c56;
-        }
-
-        .input-area {
-            display: flex;
-            padding: 15px;
-            background: #0d1117;
-            border-top: 1px solid #30363d;
-        }
-
-        input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            background: #0d1117;
-            color: white;
-            outline: none;
-        }
-
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            margin-left: 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
+        :root { --primary: #00f2fe; --secondary: #4facfe; --bg: #0b0e14; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; display: flex; justify-content: center; padding: 20px; }
+        .chat-container { width: 100%; max-width: 700px; background: #1a1f2b; border-radius: 15px; display: flex; flex-direction: column; height: 85vh; border: 1px solid #333; }
+        #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .message { padding: 15px; border-radius: 12px; max-width: 90%; line-height: 1.6; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .user { align-self: flex-end; background: var(--secondary); color: white; font-weight: 500; }
+        .ai { align-self: flex-start; background: #2d3446; border-left: 4px solid var(--primary); }
+        .input-area { display: flex; padding: 20px; background: #121721; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
+        input { flex: 1; padding: 15px; border: none; border-radius: 8px; background: #252b3a; color: white; outline: none; }
+        button { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: #000; font-weight: bold; border: none; padding: 0 25px; margin-left: 10px; border-radius: 8px; cursor: pointer; }
+        .script-step { margin-bottom: 10px; padding: 8px; background: #384055; border-radius: 5px; }
+        b { color: var(--primary); }
     </style>
 </head>
 <body>
 
 <div class="chat-container">
-    <div class="chat-header">🚀 ViralMind AI: Ideias & Roteiros</div>
     <div id="chat-box">
-        <div class="message ai">Olá! Sobre qual nicho você quer ideias de vídeos virais hoje? (Ex: Culinária, Tech, Finanças)</div>
+        <div class="message ai">👋 Olá! Me diga qual o tema do seu vídeo e eu te darei 3 ideias virais. Se gostar de uma, peça o <b>roteiro detalhado</b>!</div>
     </div>
     <div class="input-area">
-        <input type="text" id="user-input" placeholder="Pergunte algo...">
-        <button onclick="sendMessage()">Enviar</button>
+        <input type="text" id="user-input" placeholder="Ex: Ideias para canal de tecnologia..." onkeypress="if(event.key === 'Enter') sendMessage()">
+        <button onclick="sendMessage()">GERAR</button>
     </div>
 </div>
 
 <script>
+    let lastTopic = ""; // Para evitar repetição e manter o contexto
+
     function sendMessage() {
         const input = document.getElementById('user-input');
         const chatBox = document.getElementById('chat-box');
+        const text = input.value.trim();
         
-        if (input.value.trim() === "") return;
+        if (text === "") return;
 
-        // Adiciona mensagem do usuário
-        const userDiv = document.createElement('div');
-        userDiv.className = 'message user';
-        userDiv.innerText = input.value;
-        chatBox.appendChild(userDiv);
-
-        const prompt = input.value.toLowerCase();
+        // Mensagem do Usuário
+        appendMessage('user', text);
         input.value = "";
 
-        // Resposta Simulada da IA
+        // Lógica de Inteligência (Simulada sem repetição)
         setTimeout(() => {
-            const aiDiv = document.createElement('div');
-            aiDiv.className = 'message ai';
-            
-            if (prompt.includes("roteiro")) {
-                aiDiv.innerHTML = "<b>🎬 Roteiro Viral Gerado:</b><br><br><b>0-3s:</b> O Gancho: 'Você não vai acreditar no que essa ferramenta faz...'<br><b>3-15s:</b> O Problema que todos sentem.<br><b>15-40s:</b> A Solução rápida.<br><b>Fim:</b> CTA: Siga para mais dicas!";
+            let response = "";
+            const query = text.toLowerCase();
+
+            if (query.includes("roteiro") || query.includes("escreva") || query.includes("detalhe")) {
+                response = `🎬 <b>ROTEIRO ESTRUTURADO:</b><br><br>
+                <div class="script-step"><b>0:00 - 0:05 (O Gancho):</b><br>🗣️ <i>"Você sabia que a maioria das pessoas erra nisso aqui?"</i><br>🖼️ Mostrar: Close rápido no rosto ou algo visualmente chocante.</div>
+                <div class="script-step"><b>0:05 - 0:20 (A Retenção):</b><br>🗣️ <i>"Eu descobri um método que economiza 3 horas do meu dia e ninguém está falando sobre isso."</i><br>🖼️ Mostrar: Gravação de tela rápida ou cortes dinâmicos.</div>
+                <div class="script-step"><b>0:20 - 0:50 (O Conteúdo):</b><br>🗣️ <i>"Primeiro você faz isso, depois ajusta aquilo. O segredo está no detalhe final..."</i><br>🖼️ Mostrar: Tutorial passo a passo com legendas grandes.</div>
+                <div class="script-step"><b>0:50 - 1:00 (CTA):</b><br>🗣️ <i>"Se você quer a parte 2, comenta 'EU QUERO' aqui embaixo!"</i><br>🖼️ Mostrar: Apontando para os comentários.</div>`;
             } else {
-                aiDiv.innerHTML = "<b>💡 Ideias Virais:</b><br>1. 'O erro que todo iniciante comete em " + prompt + "'.<br>2. '3 Ferramentas secretas para quem ama " + prompt + "'.<br>3. Desafio de 7 dias focados em resultados reais.";
+                lastTopic = text;
+                response = `💡 <b>3 IDEIAS VIRAIS PARA:</b> "${text.toUpperCase()}"<br><br>
+                1️⃣ <b>O Mito:</b> "Pare de fazer [X] se você quer ter sucesso em ${text}."<br>
+                2️⃣ <b>A Lista:</b> "3 ferramentas gratuitas que parecem ilegais para ${text}."<br>
+                3️⃣ <b>O Desafio:</b> "Eu tentei ${text} por 7 dias e esse foi o resultado (surpreendente)."<br><br>
+                ✨ <i>Gostou de alguma? Digite "Me dê o <b>roteiro</b> da ideia 2"!</i>`;
             }
-            
-            chatBox.appendChild(aiDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }, 1000);
+
+            appendMessage('ai', response);
+        }, 800);
+    }
+
+    function appendMessage(sender, text) {
+        const chatBox = document.getElementById('chat-box');
+        const div = document.createElement('div');
+        div.className = 'message ' + sender;
+        div.innerHTML = text;
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 </script>
 
