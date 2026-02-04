@@ -3,166 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViralMind AI - O Gerador Definitivo</title>
+    <title>ViralMind AI - Ideias Infinitas</title>
     <style>
-        :root {
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --accent: #f093fb;
-            --bg: #0d1117;
-            --card: #161b22;
-            --border: #30363d;
-            --user-msg: #1f6feb;
-        }
-
-        * { box-sizing: border-box; }
-        body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background: var(--bg); 
-            color: #c9d1d9; 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
-            background: var(--card);
-        }
-
-        header {
-            padding: 20px;
-            background: rgba(22, 27, 34, 0.8);
-            border-bottom: 1px solid var(--border);
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        header h1 { margin: 0; font-size: 1.5rem; color: var(--primary); }
-
-        #chat-box {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            scroll-behavior: smooth;
-        }
-
-        .message {
-            max-width: 85%;
-            padding: 15px;
-            border-radius: 15px;
-            line-height: 1.6;
-            position: relative;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .ai { align-self: flex-start; background: #21262d; border: 1px solid var(--border); border-bottom-left-radius: 2px; }
-        .user { align-self: flex-end; background: var(--user-msg); color: white; border-bottom-right-radius: 2px; }
-
-        .input-area {
-            padding: 20px;
-            background: #0d1117;
-            display: flex;
-            gap: 10px;
-            border-top: 1px solid var(--border);
-        }
-
-        input {
-            flex: 1;
-            background: #21262d;
-            border: 1px solid var(--border);
-            padding: 12px 15px;
-            border-radius: 8px;
-            color: white;
-            outline: none;
-        }
-
-        input:focus { border-color: var(--primary); }
-
-        button {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        button:hover { transform: scale(1.05); }
-
-        .script-box {
-            background: #0d1117;
-            border: 1px dashed var(--primary);
-            padding: 15px;
-            margin-top: 10px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-        .badge-fala { background: #238636; color: white; }
-        .badge-cena { background: #8957e5; color: white; }
-
-        .typing { font-style: italic; color: #8b949e; font-size: 0.8rem; }
+        :root { --primary: #00f2fe; --secondary: #4facfe; --bg: #0d1117; --card: #161b22; --border: #30363d; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #c9d1d9; margin: 0; display: flex; justify-content: center; height: 100vh; }
+        .container { width: 100%; max-width: 700px; display: flex; flex-direction: column; background: var(--card); border-inline: 1px solid var(--border); }
+        header { padding: 15px; text-align: center; border-bottom: 1px solid var(--border); background: #1c2128; }
+        header h1 { margin: 0; font-size: 1.3rem; color: var(--primary); }
+        #chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        .message { padding: 15px; border-radius: 12px; max-width: 85%; line-height: 1.5; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; } }
+        .ai { align-self: flex-start; background: #21262d; border: 1px solid var(--border); }
+        .user { align-self: flex-end; background: #1f6feb; color: white; }
+        .input-area { padding: 15px; background: #0d1117; display: flex; gap: 10px; border-top: 1px solid var(--border); }
+        input { flex: 1; background: #21262d; border: 1px solid var(--border); padding: 12px; border-radius: 8px; color: white; outline: none; }
+        button { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .script-step { background: #0d1117; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 3px solid var(--secondary); }
+        b { color: var(--primary); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>🤖 ViralMind AI</h1>
-        <small>Estrategista de Conteúdo Viral</small>
-    </header>
-
+    <header><h1>🚀 ViralMind AI v3.0</h1></header>
     <div id="chat-box">
-        <div class="message ai">
-            Olá! Sou sua IA estrategista. 🚀<br><br>
-            Digite um <b>tema ou nicho</b> (ex: <i>Emagrecimento, Programação, Viagens</i>) e eu te darei ideias virais e roteiros completos!
-        </div>
+        <div class="message ai">Olá! Qual o tema de hoje? Eu garanto que cada ideia será única!</div>
     </div>
-
-    <div id="typing-indicator" class="typing" style="padding: 0 20px; display: none;">A IA está pensando em algo viral...</div>
-
     <div class="input-area">
-        <input type="text" id="user-input" placeholder="Pergunte algo ou peça mais ideias..." onkeypress="if(event.key === 'Enter') handleSend()">
+        <input type="text" id="user-input" placeholder="Tema ou 'me dê mais ideias'..." onkeypress="if(event.key === 'Enter') handleSend()">
         <button onclick="handleSend()">GERAR</button>
     </div>
 </div>
 
 <script>
     let currentTopic = "";
-    const templates = [
-        { t: "O Grande Erro", c: "Por que 90% das pessoas falham em [TEMA] (e a solução)." },
-        { t: "A Ferramenta Proibida", c: "A ferramenta de [TEMA] que os profissionais escondem de você." },
-        { t: "Hack de 60 Segundos", c: "Como conseguir resultados em [TEMA] usando apenas 1 minuto por dia." },
-        { t: "Expectativa vs Realidade", c: "O que te contam sobre [TEMA] vs. como realmente é." },
-        { t: "Desafio Viral", c: "Tente fazer isso por 24h em [TEMA] e veja o que acontece." },
-        { t: "Lista de Ouro", c: "3 itens que você precisa para começar em [TEMA] hoje mesmo." }
+    let usedIdeas = new Set(); // Armazena o que já foi dito
+
+    const baseTemplates = [
+        "Como ganhar tempo com [TEMA] usando IA.",
+        "O maior erro que cometem em [TEMA] e ninguém percebe.",
+        "3 ferramentas secretas para dominar [TEMA].",
+        "POV: Você descobriu o segredo de [TEMA].",
+        "Por que você deveria parar de ignorar [TEMA] em 2024.",
+        "O guia definitivo para [TEMA] em 30 segundos.",
+        "A verdade chocante sobre [TEMA] que não te contam.",
+        "Como eu saí do zero em [TEMA] com este método.",
+        "Desafio: 7 dias fazendo [TEMA] da forma certa.",
+        "A rotina matinal perfeita para quem quer [TEMA]."
     ];
 
     function handleSend() {
@@ -172,79 +59,70 @@
 
         appendMessage('user', text);
         input.value = "";
-        showTyping(true);
 
         setTimeout(() => {
-            processAI(text);
-            showTyping(false);
-        }, 1200);
+            const q = text.toLowerCase();
+            let response = "";
+
+            // Se for pedido de roteiro
+            if (q.includes("roteiro") || q.includes("escreva")) {
+                response = generateScript();
+            } 
+            // Se for pedido de ideias
+            else {
+                if (!q.includes("mais") && !q.includes("outra")) {
+                    currentTopic = text;
+                    usedIdeas.clear(); // Novo tema, reseta as repetições
+                }
+                response = generateUniqueIdeas();
+            }
+            appendMessage('ai', response);
+        }, 600);
     }
 
-    function processAI(query) {
-        const q = query.toLowerCase();
-        let response = "";
+    function generateUniqueIdeas() {
+        let ideasFound = 0;
+        let html = `💡 <b>NOVAS IDEIAS PARA: ${currentTopic.toUpperCase()}</b><br><br>`;
+        
+        // Tenta encontrar 3 ideias que ainda não foram usadas
+        let availableTemplates = baseTemplates.filter(t => !usedIdeas.has(t));
 
-        // LÓGICA DE ROTEIRO
-        if (q.includes("roteiro") || q.includes("escreva") || q.includes("detalhe")) {
-            const topic = currentTopic || "seu tema";
-            response = `🎬 <b>ROTEIRO PROFISSIONAL: ${topic.toUpperCase()}</b><br>
-            <i>Use este script para prender a atenção do início ao fim.</i><br><br>
-            
-            <div class="script-box">
-                <span class="badge badge-cena">Cena 1 (0-5s)</span><br>
-                <b>Ação:</b> Mostre o resultado final ou um problema chocante. Use legendas grandes.<br>
-                <span class="badge badge-fala">Fala:</span> "Você ainda faz isso em ${topic}? Pare agora ou vai se arrepender!"
-            </div>
-
-            <div class="script-box">
-                <span class="badge badge-cena">Cena 2 (5-20s)</span><br>
-                <b>Ação:</b> Cortes rápidos mostrando o 'passo a passo' acelerado.<br>
-                <span class="badge badge-fala">Fala:</span> "O segredo é que ninguém te conta que o truque está nesse detalhe aqui. Veja como é simples..."
-            </div>
-
-            <div class="script-box">
-                <span class="badge badge-cena">Cena 3 (20-40s)</span><br>
-                <b>Ação:</b> Mostre a tela do celular ou a ferramenta funcionando.<br>
-                <span class="badge badge-fala">Fala:</span> "Aplique isso hoje e veja a diferença. Funciona para qualquer um que queira dominar ${topic}."
-            </div>
-
-            <div class="script-box">
-                <span class="badge badge-cena">CTA Final</span><br>
-                <b>Ação:</b> Aponte para o botão de seguir ou link na bio.<br>
-                <span class="badge badge-fala">Fala:</span> "Curtiu? Então já salva pra não perder e me segue para a parte 2!"
-            </div>`;
-        } 
-        // LÓGICA DE IDEIAS
-        else {
-            if (!q.includes("mais") && !q.includes("outra")) {
-                currentTopic = query;
-            }
-            
-            const shuffled = templates.sort(() => 0.5 - Math.random()).slice(0, 3);
-            response = `💡 <b>3 IDEIAS PARA BOMBAR EM:</b> "${currentTopic.toUpperCase()}"<br><br>`;
-            
-            shuffled.forEach((item, i) => {
-                const finalDesc = item.c.replace("[TEMA]", currentTopic);
-                response += `<b>${i+1}. ${item.t}:</b><br> ➔ ${finalDesc}<br><br>`;
-            });
-
-            response += `👉 <i>Dica: Peça <b>"roteiro da ideia 1"</b> ou digite <b>"mais ideias"</b>!</i>`;
+        // Se acabarem as ideias base, criamos variações dinâmicas
+        if (availableTemplates.length < 3) {
+            availableTemplates = [
+                `Como aplicar [TEMA] no seu dia a dia.`,
+                `O que acontece se você misturar [TEMA] com produtividade.`,
+                `A técnica de 2 minutos para [TEMA].`,
+                `O segredo dos milionários sobre [TEMA].`
+            ];
         }
 
-        appendMessage('ai', response);
+        const selected = availableTemplates.sort(() => 0.5 - Math.random()).slice(0, 3);
+        
+        selected.forEach((item, i) => {
+            usedIdeas.add(item); // Marca como usada
+            const final = item.replace("[TEMA]", currentTopic);
+            html += `${i+1}️⃣ ${final}<br><br>`;
+        });
+
+        html += `<i>Peça "mais" para ideias inéditas ou "roteiro" para gravar!</i>`;
+        return html;
     }
 
-    function appendMessage(type, text) {
+    function generateScript() {
+        return `🎬 <b>ROTEIRO INÉDITO:</b><br>
+        <div class="script-step"><b>HOOK (0-5s):</b> "Você já sentiu que está travado em ${currentTopic}? Eu descobri o porquê."</div>
+        <div class="script-step"><b>CONTEÚDO (5-40s):</b> "O erro é focar no final. O segredo está aqui... (mostre o processo na tela)."</div>
+        <div class="script-step"><b>CTA (40-60s):</b> "Comenta '${currentTopic.toUpperCase()}' se você quer a parte 2 detalhada!"</div>`;
+    }
+
+    function appendMessage(sender, text) {
         const chatBox = document.getElementById('chat-box');
         const div = document.createElement('div');
-        div.className = `message ${type}`;
+        div.className = `message ${sender}`;
         div.innerHTML = text;
         chatBox.appendChild(div);
         chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function showTyping(show) {
-        document.getElementById('typing-indicator').style.display = show ? 'block' : 'none';
     }
 </script>
 
